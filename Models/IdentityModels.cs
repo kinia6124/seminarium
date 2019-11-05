@@ -29,5 +29,7 @@ namespace seminarium.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<seminarium.Models.Author> Authors { get; set; }
     }
 }
