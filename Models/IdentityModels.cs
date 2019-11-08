@@ -31,5 +31,13 @@ namespace seminarium.Models
         }
 
         public System.Data.Entity.DbSet<seminarium.Models.Author> Authors { get; set; }
+
+        public System.Data.Entity.DbSet<seminarium.Models.Book> Books { get; set; }
+
+        public System.Data.Entity.DbSet<seminarium.Models.AuthorBook> AuthorBooks { get; set; }
+
+        public System.Data.Entity.DbSet<seminarium.Models.Category> Categories { get; set; }
+
+        public System.Data.Entity.DbSet<seminarium.Models.CategoryBook> CategoryBooks { get; set; }
     }
 }

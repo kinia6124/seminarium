@@ -8,7 +8,7 @@ using System.Web;
 
 namespace seminarium.DAL
 {
-    public class CzytelniaContext:DbContext
+    public class CzytelniaContext : DbContext
 
     {
 
@@ -20,8 +20,7 @@ namespace seminarium.DAL
         public DbSet<Book> Books { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<CategoryBook> CategoryBooks { get; set; }
-        public DbSet<PublishingBook> PublishingBooks { get; set; }
-        public DbSet<PublishingHouse> PublishingHouses { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
