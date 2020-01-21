@@ -73,7 +73,7 @@
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.Author.Imie)</td>
                         <td>@Html.DisplayFor(modelItem => item.Author.Nazwisko)</td>
-                        <td>@Html.ActionLink("Przejdź", "../Author/Details", new { id = Model.ID })</td>
+                        <td>@Html.ActionLink("Przejdź", "../Author/Details", new { id = Model.AuthorID })</td>
                     </tr>
                 }
             </table>

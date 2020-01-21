@@ -17,7 +17,26 @@
         <dd>
             @Html.DisplayFor(model => model.Nazwa)
         </dd>
+        </br>
+        </br>
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryBooks)
+        </dt>
+        </br>
 
+        <dd>
+            <table class="<table">
+                <tr>
+                    <th>Tytuł Książki</th>
+                </tr>
+                @foreach (var item in Model.CategoryBooks)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Book.Tytul)</td>
+                    </tr>
+                }
+            </table>
+        </dd>
     </dl>
 </div>
 <p>
