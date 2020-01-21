@@ -57,10 +57,48 @@
         <dd>
             @Html.DisplayFor(model => model.Link)
         </dd>
-
+        </br></br>
+        <dt>
+            @Html.DisplayNameFor(model => model.AuthorBooks)
+        </dt>
+        </br>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                </tr>
+                @foreach (var item in Model.AuthorBooks)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Author.Imie)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Author.Nazwisko)</td>
+                        <td>@Html.ActionLink("Przejdź", "../Author/Details", new { id = Model.ID })</td>
+                    </tr>
+                }
+            </table>
+        </dd>
+        </br></br>
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryBooks)
+        </dt>
+        </br>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Kategoria</th>
+                </tr>
+                @foreach (var item in Model.CategoryBooks)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Category.Nazwa)</td>
+                    </tr>
+                }
+            </table>
+        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    
     @Html.ActionLink("Back to List", "Index")
 </p>

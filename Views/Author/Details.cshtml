@@ -41,7 +41,26 @@
         <dd>
             @Html.DisplayFor(model => model.Zyciorys)
         </dd>
+        </br>
+        </br>
+        <dt>
+            @Html.DisplayNameFor(model=>model.AuthorBooks)
+        </dt>
+        </br>
 
+        <dd>
+            <table class="<table">
+                <tr>
+                    <th>Tytuł Książki</th>
+                </tr>
+                @foreach(var item in Model.AuthorBooks)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem=> item.Book.Tytul)</td>
+                    </tr>
+                }
+            </table>
+        </dd>
     </dl>
 </div>
 <p>
