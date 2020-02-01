@@ -15,9 +15,28 @@ namespace seminarium.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Author
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            return View(db.Authors.ToList());
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "sname_desc" : "Sname";
+            var authors = from a in db.Authors
+                          select a;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    authors = authors.OrderByDescending(a => a.Imie);
+                    break;
+                case "Sname":
+                    authors = authors.OrderBy(a => a.Nazwisko);
+                    break;
+                case "sname_desc":
+                    authors = authors.OrderByDescending(a => a.Nazwisko);
+                    break;
+                default:
+                    authors = authors.OrderBy(a => a.Imie);
+                    break;
+            }
+            return View(authors.ToList());
         }
 
         // GET: Author/Details/5
