@@ -18,7 +18,7 @@ namespace seminarium.Controllers
         public ActionResult Index(string sortOrder)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "sname_desc" : "Sname";
+            ViewBag.SNameSortParm = String.IsNullOrEmpty(sortOrder) ? "sname_desc" : "Sname";
             var authors = from a in db.Authors
                           select a;
             switch (sortOrder)
@@ -26,12 +26,12 @@ namespace seminarium.Controllers
                 case "name_desc":
                     authors = authors.OrderByDescending(a => a.Imie);
                     break;
-                case "Sname":
-                    authors = authors.OrderBy(a => a.Nazwisko);
-                    break;
                 case "sname_desc":
                     authors = authors.OrderByDescending(a => a.Nazwisko);
                     break;
+                case "Sname":
+                    authors = authors.OrderBy(a => a.Nazwisko);
+                    break;                    
                 default:
                     authors = authors.OrderBy(a => a.Imie);
                     break;

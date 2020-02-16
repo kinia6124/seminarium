@@ -9,10 +9,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Imie)
+            @Html.ActionLink("Imię", "Index", new { sortOrder=ViewBag.NameSortParm})
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Nazwisko)
+            @Html.ActionLink("Nazwisko", "Index", new { sortOrder = ViewBag.SNameSortParm })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Data_ur)

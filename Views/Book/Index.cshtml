@@ -5,12 +5,18 @@
 }
 
 <h2>Index</h2>
-
+@using (Html.BeginForm())
+{
+    <p>
+        Znajdź: @Html.TextBox("searchString")
+        <input type="submit" value="Szukaj"/>
+    </p>
+}
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Tytul)
+            @Html.ActionLink("Tytul", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Strony)
