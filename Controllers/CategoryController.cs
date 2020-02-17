@@ -15,9 +15,15 @@ namespace seminarium.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Category
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(db.Categories.ToList());
+            var categories = from c in db.Categories
+                          select c;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                categories = categories.Where(c => c.Nazwa.Contains(searchString));
+            }
+            return View(categories.ToList());
         }
 
         // GET: Category/Details/5

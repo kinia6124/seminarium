@@ -5,44 +5,47 @@
 }
 
 <h2>Autorzy</h2>
-
+@using (Html.BeginForm())
+{
+    <p>
+        Znajdź: @Html.TextBox("searchString")
+        <input type="submit" value="Szukaj" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Imię", "Index", new { sortOrder=ViewBag.NameSortParm})
+            @Html.ActionLink("Imię", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
         <th>
             @Html.ActionLink("Nazwisko", "Index", new { sortOrder = ViewBag.SNameSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Data_ur)
+            Data urodzenia
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Zyciorys)
-        </th>
+       
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Imie)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nazwisko)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Data_ur)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Zyciorys)
-        </td>
-        <td>
-           
-            @Html.ActionLink("Szczegóły", "Details", new { id=item.ID }) 
-            
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Imie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nazwisko)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data_ur)
+            </td>
+          
+            <td>
+
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.ID })
+
+            </td>
+        </tr>
+    }
 
 </table>

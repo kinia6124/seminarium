@@ -15,12 +15,17 @@ namespace seminarium.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Author
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.SNameSortParm = String.IsNullOrEmpty(sortOrder) ? "sname_desc" : "Sname";
             var authors = from a in db.Authors
                           select a;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                authors = authors.Where(a => a.Imie.Contains(searchString)
+                                          || a.Nazwisko.Contains(searchString));
+            }
             switch (sortOrder)
             {
                 case "name_desc":

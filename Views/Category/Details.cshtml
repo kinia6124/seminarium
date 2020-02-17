@@ -1,13 +1,13 @@
 ﻿@model seminarium.Models.Category
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Szczegóły";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły</h2>
 
 <div>
-    <h4>Category</h4>
+    <h4>Kategorie</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -20,7 +20,7 @@
         </br>
         </br>
         <dt>
-            @Html.DisplayNameFor(model => model.CategoryBooks)
+            Książki w tej kategorii
         </dt>
         </br>
 
@@ -40,6 +40,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+
+    @Html.ActionLink("Wróć", "Index")
 </p>

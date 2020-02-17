@@ -1,17 +1,17 @@
 ﻿@model seminarium.Models.Author
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Szczegóły";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły</h2>
 
 <div>
-    <h4>Author</h4>
+    <h4>Autor</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Imie)
+           Imię
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Data_ur)
+            Data urodzenia
         </dt>
 
         <dd>
@@ -35,7 +35,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Zyciorys)
+           Życiorys
         </dt>
 
         <dd>
@@ -44,7 +44,7 @@
         </br>
         </br>
         <dt>
-            @Html.DisplayNameFor(model=>model.AuthorBooks)
+            Książki Autora
         </dt>
         </br>
 
@@ -64,6 +64,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    
+    @Html.ActionLink("Wróć", "Index")
 </p>

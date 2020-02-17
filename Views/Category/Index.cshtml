@@ -1,14 +1,18 @@
 ﻿@model IEnumerable<seminarium.Models.Category>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Kategorie";
 }
 
-<h2>Index</h2>
+<h2>Kategorie</h2>
+@using (Html.BeginForm())
+{
+    <p>
+        Znajdź: @Html.TextBox("searchString")
+        <input type="submit" value="Szukaj" />
+    </p>
+}
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -17,17 +21,17 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nazwa)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nazwa)
+            </td>
+            <td>
+                
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.ID }) 
+            </td>
+        </tr>
+    }
 
 </table>
