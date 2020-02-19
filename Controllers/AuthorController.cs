@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using seminarium.Models;
@@ -15,33 +16,41 @@ namespace seminarium.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Author
-        public ActionResult Index(string sortOrder, string searchString)
+        public async Task<ActionResult> Index(string sortOrder, string searchString)
         {
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.SNameSortParm = String.IsNullOrEmpty(sortOrder) ? "sname_desc" : "Sname";
-            var authors = from a in db.Authors
-                          select a;
-            if (!String.IsNullOrEmpty(searchString))
+            if (Request.IsAuthenticated)
             {
-                authors = authors.Where(a => a.Imie.Contains(searchString)
-                                          || a.Nazwisko.Contains(searchString));
+
+                ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                ViewBag.SNameSortParm = String.IsNullOrEmpty(sortOrder) ? "sname_desc" : "Sname";
+                var authors = from a in db.Authors
+                              select a;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    authors = authors.Where(a => a.Imie.Contains(searchString)
+                                              || a.Nazwisko.Contains(searchString));
+                }
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        authors = authors.OrderByDescending(a => a.Imie);
+                        break;
+                    case "sname_desc":
+                        authors = authors.OrderByDescending(a => a.Nazwisko);
+                        break;
+                    case "Sname":
+                        authors = authors.OrderBy(a => a.Nazwisko);
+                        break;
+                    default:
+                        authors = authors.OrderBy(a => a.Imie);
+                        break;
+                }
+                return View(authors.ToList());
             }
-            switch (sortOrder)
+            else
             {
-                case "name_desc":
-                    authors = authors.OrderByDescending(a => a.Imie);
-                    break;
-                case "sname_desc":
-                    authors = authors.OrderByDescending(a => a.Nazwisko);
-                    break;
-                case "Sname":
-                    authors = authors.OrderBy(a => a.Nazwisko);
-                    break;                    
-                default:
-                    authors = authors.OrderBy(a => a.Imie);
-                    break;
+                return RedirectToAction("Login", "Account", new { returnUrl = Url.Action("Index", "Author") });
             }
-            return View(authors.ToList());
         }
 
         // GET: Author/Details/5

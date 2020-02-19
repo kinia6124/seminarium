@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using seminarium.Models;
@@ -15,15 +16,22 @@ namespace seminarium.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Category
-        public ActionResult Index(string searchString)
+        public async Task<ActionResult> Index(string searchString)
         {
-            var categories = from c in db.Categories
+            if (Request.IsAuthenticated)
+            {
+                var categories = from c in db.Categories
                           select c;
             if (!String.IsNullOrEmpty(searchString))
             {
                 categories = categories.Where(c => c.Nazwa.Contains(searchString));
             }
             return View(categories.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { returnUrl = Url.Action("Index", "Category") });
+            }
         }
 
         // GET: Category/Details/5

@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using seminarium.Models;
@@ -15,26 +16,35 @@ namespace seminarium.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Book
-        public ActionResult Index(string sortOrder, string searchString)
+        public async Task<ActionResult> Index(string sortOrder, string searchString)
         {
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            var books = from b in db.Books
-                        select b;
-            if(!String.IsNullOrEmpty(searchString))
+            if (Request.IsAuthenticated)
             {
-                books = books.Where(b =>b.Tytul.Contains(searchString));
+                
+                    ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                    var books = from b in db.Books
+                                select b;
+                    if (!String.IsNullOrEmpty(searchString))
+                    {
+                        books = books.Where(b => b.Tytul.Contains(searchString));
+                    }
+                    switch (sortOrder)
+                    {
+                        case "name_desc":
+                            books = books.OrderByDescending(b => b.Tytul);
+                            break;
+                        default:
+                            books = books.OrderBy(b => b.Tytul);
+                            break;
+                    }
+                    return View(books.ToList());
             }
-            switch(sortOrder)
-            {
-                case "name_desc":
-                    books = books.OrderByDescending(b => b.Tytul);
-                    break;
-                default:
-                    books = books.OrderBy(b => b.Tytul);
-                    break;
-            }
-            return View(books.ToList());
+                else
+                {
+                    return RedirectToAction("Login", "Account", new { returnUrl = Url.Action("Index", "Book") });
+                }
         }
+        
 
         // GET: Book/Details/5
         public ActionResult Details(int? id)
